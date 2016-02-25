@@ -69,7 +69,7 @@ class DB_Functions {
             return false;
         }
     }
-
+    
     public function addUserAccount($username, $accno) {
         $user = $this->getUserDetails($username);
         $uuid =  $user['uuid'];
