@@ -20,7 +20,13 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
             session_start();
             $_SESSION['name']= $user["name"];
             $_SESSION['username']= $username;
+            $_SESSION['designation'] = $user['designation'];
+            $_SESSION['department'] = $user['department'];
+            $_SESSION['empid'] = $user['empid'];
+            $accno = $db->getAccountNo($username);
+            $_SESSION['accno'] = $accno;
             $_SESSION['logged_in'] = true;
+
             $response["error"] = 0;
             $response["user"]["uuid"] = $user["uuid"];
             $response["user"]["name"] = $user["name"];

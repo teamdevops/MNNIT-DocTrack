@@ -27,7 +27,7 @@ else {
     <div class="textContainer">
         <p>
             <ol>
-                <li><a href="telephone.html">Telephone Bill Form</a></li>
+                <li><a href="telephone.php">Telephone Bill Form</a></li>
                 <li><a href="ltc.html">LTC Form</a></li>
                 <li><a href="cpda.html">CPDA Form</a></li>
             </ol>

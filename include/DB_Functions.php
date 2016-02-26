@@ -69,7 +69,7 @@ class DB_Functions {
             return false;
         }
     }
-    
+
     public function addUserAccount($username, $accno) {
         $user = $this->getUserDetails($username);
         $uuid =  $user['uuid'];
@@ -108,6 +108,30 @@ class DB_Functions {
         }
         else {
             return false;
+        }
+    }
+
+    public function getAccountNo($username) {
+        $stmt = $this->conn->prepare("SELECT uuid from doctrack_users WHERE username = ? LIMIT 1");
+        $stmt->bind_param("s", $username);
+        if($stmt->execute()) {
+            $user = $stmt->get_result()->fetch_assoc();
+            $stmt->close();
+            $uuid = $user['uuid'];
+            $stmt = $this->conn->prepare("SELECT accno from doctrack_user_acc WHERE uuid = ? LIMIT 1");
+            $stmt->bind_param("s", $uuid);
+            if($stmt->execute()) {
+                $user = $stmt->get_result()->fetch_assoc();
+                $stmt->close();
+                $accno = $user['accno'];
+                return $accno;
+            }
+            else {
+                return NULL;
+            }
+        }
+        else {
+            return NULL;
         }
     }
 }

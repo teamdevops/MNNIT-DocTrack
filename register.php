@@ -33,12 +33,7 @@ if (isset($_POST['name']) && isset($_POST['email']) && isset($_POST['username'])
                  echo '<script language="javascript">';
                  echo 'alert("Register done successfully")';
                  echo '</script>';
-<<<<<<< HEAD
                  echo "<script>setTimeout(\"location.href = 'index.html';\",0);</script>";
-=======
-                 echo "<script>setTimeout(\"location.href = 'login.html';\",0);</script>";
->>>>>>> 3e9aa8b9cfdce63cef32cf331f8d45df511e7d2f
-
 			 }
 			 else {
 			$response["error"] = 2;
