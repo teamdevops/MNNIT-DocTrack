@@ -156,7 +156,7 @@ label {
 <br/><br/>
 <div align="center">
     <button class="noprint" type="button" onclick="submitAndPrint()" > Print Form </button>
-    <span style="padding-left: 10px"> <button class="noprint" type="button" onclick="history.back();">Back</button> </span>
+    <span style="padding-left: 10px"> <button class="noprint" type="button" onclick="location.href='home.php'">Back to Home</button> </span>
 </div>
 
 <script>

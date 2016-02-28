@@ -11,6 +11,8 @@ if (isset($_POST['accountno'])) {
     $username = $_SESSION['username'];
     if($db->addUserAccount($username,$accno)) {
         $response["error"] = 0;
+        $accno = $db->getAccountNo($username);
+        $_SESSION['accno'] = $accno;
         echo '<script language="javascript">';
         echo 'alert("Account no added successfully!")';
         echo '</script>';
