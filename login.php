@@ -18,6 +18,7 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
         // user is found , now check for the correct login credentials
         if ( $password  == $user["password"]) {
             session_start();
+            $_SESSION['uuid'] = $user['uuid'];
             $_SESSION['name']= $user["name"];
             $_SESSION['username']= $username;
             $_SESSION['designation'] = $user['designation'];

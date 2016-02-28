@@ -8,6 +8,7 @@ if (! empty($_SESSION['logged_in'])) {
     $department = $_SESSION['department'];
     $empid = $_SESSION['empid'];
     $accno = $_SESSION['accno'];
+    $uuid = $_SESSION['uuid'];
 }
 else {
      header('Location: index.html');
@@ -26,24 +27,7 @@ label {
    border-style:none;
    font-weight: bold;
 }
-.myInput:hover
-{
-   border-style:none;
-}
-.myInput:focus
-{
-   border-style:none;
-}
-
 .myInput1
-{
-   border-style:none;
-}
-.myInput:hover
-{
-   border-style:none;
-}
-.myInput:focus
 {
    border-style:none;
 }
@@ -60,9 +44,7 @@ label {
 {
   padding-left: 20px;
 }
-
 </style>
-
 <style type="text/css" media="print">
 .noprint{
         display:none;
@@ -73,9 +55,6 @@ label {
 <head>
 <meta charset="UTF-8">
 <title>ClaimForm-Telephone</title>
-<head>
-<link rel="stylesheet" type="text/css" href="css/theme">
-</head>
 </head>
 
 <body class="layout" id="body">
@@ -117,27 +96,24 @@ label {
 </p>
 <p>
 	<br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Kindly arrange to reimburse Telephone charges of <input type="text"  class="myInput" name="telcharges" placeholder="Telephonecharges." readonly="true"><br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for the period from <input id="from_month" type="text"  class="myInput" size="10" name="month" placeholder="from"> to <input id="to_month" type="text"  class="myInput" size="10" name="month" readonly="true" placeholder="To"> as per details given below.<br>
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The amount may be credited to my bank account number with Vijaya Bank <input type="text"  class="myInput" name="accnumber"  value="<?php echo $accno; ?>"  placeholder="A/C Number" readonly="true"><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Kindly arrange to reimburse Telephone charges of <input id="totalchargesup" type="text"  class="myInput" name="telcharges" readonly="true"><br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for the period from <input id="from_month" type="text"  class="myInput" size="10" name="month" readonly="true"> to <input id="to_month" type="text"  class="myInput" size="10" name="month" readonly="true"> as per details given below.<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The amount may be credited to my bank account number with Vijaya Bank <input type="text"  class="myInput" name="accnumber"  value="<?php echo $accno; ?>" readonly="true"><br>
 	</p>
 <form>
  <label>
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Landline Telephone No.:
-  <input id ="landline" type="text" class="myInput" name="landline" placeholder="Landline" readonly="true" required>
+  <input id ="landline" type="text" class="myInput" name="landline"  readonly="true" required>
 </label>
   &nbsp;&nbsp;MobileNo.&nbsp;:
 <label>
-  <input id ="mobile1" type="text"  class="myInput" name="mobilenumber1" readonly="true" placeholder="Pre-paid" >
+  <input id ="mobile1" type="text"  class="myInput" name="mobilenumber1" readonly="true"  >
 </label>
 <br>
-  <label>
-   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <input type="text"  class="myInput" name="department">
-</label>
+
 <label>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MobileNo. :
-  <input id ="mobile2" type="text"  class="myInput" name="mobileumber2" placeholder="postpaid." readonly="true" required>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MobileNo. :
+  <input id ="mobile2" type="text"  class="myInput" name="mobileumber2"  readonly="true" required>
 </label>
 </form>
 
@@ -155,145 +131,123 @@ label {
 
         </tr>
         <tr>
-            <td><input class="myInput1" size=15 type="text" id="month" ></td>
-            <td><input class="myInput1" size=15 type="text" id="op1" onChange="calc(); readonly="true"" ></td>
-            <td><input class="myInput1" size=15 type="text" id="op2" onChange="calc(); readonly="true""></td>
-            <td><input class="myInput1" size=15 type="text" id="op3" onChange="calc(); readonly="true"" ></td>
-            <td><input class="myInput1" size=15 type="text" id="total" readonly="true"></td>
-            <td><input class="myInput1" size=15 type="text" id="claim" readonly="true"></td>
-            <td><input class="noprint" type="button" hidden="true "id="delmonth" value="Delete" onclick="deleteRow(this)"/></td>
-            <td><input class="noprint" type="button" hidden="true" id="addmonth" value="Add more months" onclick="insRow()"/></td>
+            <td><input class="myInput1" size=15 type="text" id="month1" ></td>
+            <td><input class="myInput1" size=15 type="text" id="op11" readonly="true"></td>
+            <td><input class="myInput1" size=15 type="text" id="op21" readonly="true"></td>
+            <td><input class="myInput1" size=15 type="text" id="op31" readonly="true"></td>
+            <td><input class="myInput1" size=15 type="text" id="total1" readonly="true"></td>
+            <td><input class="myInput1" size=15 type="text" id="claim1" readonly="true"></td>
         </tr>
     </table>
 </p>
     <p>
-    	<center>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Total Telephone Charges:</b><input type="text"  class="myInput" id="tc" name="totalcharges" placeholder="Totalcharges." onClick="coltotal();" readonly="true"></center><br>
+    	<center>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <b>Total Telephone Charges:</b><input type="text" class="myInput" id="totalchargesdown" name="totalchargesdown" readonly="true"></center><br>
     	</p>
 <p>
 
-    	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1. Certified that the above telephones are in my name and all the numbers are made available to my Head of the Department/Section in-charge for &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;communication with me.<br>
+    	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1. Certified that the above telephones are in my name and all the numbers are made available to my Head of the Department/Section in-charge for communication with me.<br>
     	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.Cetified that I have incurred the above expenditure towards telephone/broadband charges during the period mentioned above.
 </p>
 
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Date:&nbsp;:<input type="text"  class="myInput" name="date" placeholder="DD/MM/YY" readonly="true">
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Date:&nbsp;:<input type="text"  class="myInput" name="date" readonly="true">
    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Signature&nbsp;:
 </div>
 <br/><br/>
 <div align="center">
-    <button class="noprint" type="button" onclick="confirmAlert();" >Print</button>
+    <button class="noprint" type="button" onclick="submitAndPrint()" > Print Form </button>
+    <span style="padding-left: 10px"> <button class="noprint" type="button" onclick="history.back();">Back</button> </span>
 </div>
 
-
 <script>
-function confirmAlert() {
-    alert('Are you sure you want to confirm? Your choices will be freezed.');
-    setTimeout("location.href = 'telephone_confirm.php';",0);
+window.onload = fillTheDetails;
+function fillTheDetails() {
+    document.getElementById("landline").value = sessionStorage.getItem('landline');
+    document.getElementById("mobile1").value = sessionStorage.getItem('mobile1');
+    document.getElementById("mobile2").value = sessionStorage.getItem('mobile2');
+    document.getElementById("from_month").value = sessionStorage.getItem('from_month');
+    document.getElementById("to_month").value = sessionStorage.getItem('to_month');
+    document.getElementById("totalchargesup").value = sessionStorage.getItem('totalchargesup');
+    document.getElementById("totalchargesdown").value = sessionStorage.getItem('totalchargesdown');
+    var rowlen = sessionStorage.getItem('rowlen');
+
+    for(i=1; i < rowlen; i++) {
+        var month = sessionStorage.getItem('month'+i);
+        var op1 = sessionStorage.getItem('op1'+i);
+        var op2 = sessionStorage.getItem('op2'+i);
+        var op3 = sessionStorage.getItem('op3'+i);
+        var total = sessionStorage.getItem('total'+i);
+        var claim = sessionStorage.getItem('claim'+i);
+        insRow(i,month,op1,op2,op3,total,claim);
+    }
+
+
 }
-function saveAndShow() {
+function submitAndPrint() {
+
+    var uuid = '<?php echo $_SESSION['uuid']; ?>';
     var landline=document.getElementById("landline").value;
     var mobile1=document.getElementById("mobile1").value;
     var mobile2=document.getElementById("mobile2").value;
     var from_month = document.getElementById("from_month").value;
     var to_month = document.getElementById("to_month").value;
-    console.log(landline + " " + mobile1 + " " + mobile2 + " " + from_month + " " + to_month);
-}
+    var totalcharges = document.getElementById("totalchargesdown").value.split(" ")[2];
+    console.log(uuid + " " + landline + " " + mobile1 + " " + mobile2 + " " + from_month + " " + to_month + " " + totalcharges);
 
-function deleteRow(row)
-{
-    var i=row.parentNode.parentNode.rowIndex;
-    document.getElementById('billtable').deleteRow(i);
-}
-
-
-function insRow()
-{
-    console.log('hi');
-    var x=document.getElementById('billtable');
-    var new_row = x.rows[1].cloneNode(true);
-    var len = x.rows.length;
-    var inp1 = new_row.cells[0].getElementsByTagName('input')[0];
-    inp1.id+=len;
-    inp1.value = '';
-    var inp2 = new_row.cells[1].getElementsByTagName('input')[0];
-    inp2.id="op1"+len;
-    inp2.value = '';
-    var inp3= new_row.cells[2].getElementsByTagName('input')[0];
-    inp3.id="op2"+len;len;
-    inp3.value='';
-    var inp4 = new_row.cells[3].getElementsByTagName('input')[0];
-    inp4.id="op3"+len;
-    inp4.value='';
-    var inp5 = new_row.cells[4].getElementsByTagName('input')[0];
-    inp5.id="total"+len;
-    inp5.value='';
-    var inp6 = new_row.cells[5].getElementsByTagName('input')[0];
-    inp6.id="claim"+len;
-    inp6.value='';
-    new_row.onChange
-    x.appendChild( new_row );
-}
-
-function calc() {
-  var x=document.getElementById('billtable');
-  var len = x.rows.length-1;
-  if(len==1)
-  {
-    var one = parseFloat(document.getElementById('op1').value,10);
-  var two = parseFloat(document.getElementById('op2').value,10);
-  var three = parseFloat(document.getElementById('op3').value,10);
-  if (isNaN(one)) one= 0;
-  if (isNaN(two)) two= 0;
-  if (isNaN(three)) three= 0;
-document.getElementById('total').value = one + two + three;
-document.getElementById('claim').value = one + two + three;
-  }
-else
-{
-  console.log(len);
-  A="op1"+len;
-  B="op2"+len;
-  C="op3"+len;
-  console.log(A);
-  console.log(B);
-  var one = parseFloat(document.getElementById("op1"+len).value,10);
-  var two = parseFloat(document.getElementById("op2"+len).value,10);
-  var three = parseFloat(document.getElementById("op3"+len).value,10);
-  if (isNaN(one)) one= 0;
-  if (isNaN(two)) two= 0;
-  if (isNaN(three)) three= 0;
-document.getElementById("total"+len).value = one + two + three;
-m=
-document.getElementById("claim"+len).value = one + two + three;
-}
-}
-
-function coltotal()
-{
-  var x=document.getElementById('billtable');
-  var len = x.rows.length;
-  console.log(len);
-  total=parseFloat(document.getElementById("total").value,10);
-      console.log(total);
-
-  for(i=2;i<len;i++)
-  {
-    total=total+parseFloat(document.getElementById("total"+i).value,10);
-   console.log(total);
-  }
- document.getElementById('tc').value = total;
-}
-
-function PrintContent()
-    {
-        printWindow = window.open("", "Preview", "location=0,status=0,scrollbars=1");
-        printWindow.document.write("<div style='width:100%;text-align:left;'>");
-        printWindow.document.write("<input type='button' id='btnPrint' value='Print' style='width:100px' onclick='window.print()' />");
-        printWindow.document.write("<input type='button' id='btnCancel' value='Cancel' style='width:100px' onclick='window.close()' />");
-        printWindow.document.write(document.getElementById('body').innerHTML);
-        printWindow.document.write("</div>");
-        printWindow.document.close();
-        printWindow.focus();
+    var xhttp;
+    if (window.XMLHttpRequest) {
+        xhttp = new XMLHttpRequest();
+    } else {
+        // code for IE6, IE5
+        xhttp = new ActiveXObject("Microsoft.XMLHTTP");
     }
+
+    xhttp.onreadystatechange = function() {
+        if (xhttp.readyState == 4 && xhttp.status == 200) {
+            console.log(xhttp.responseText);
+             if(xhttp.responseText == 'successful') {
+                 window.print();
+             } else {
+                 console.log("unsuccessfull entry");
+             }
+        }
+    }
+    xhttp.open("POST", "submitTeleBill.php", true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send("uuid=" + uuid + "&landline=" + landline + "&mobile1=" + mobile1 + "&mobile2=" + mobile2 + "&from_month=" + from_month + "&to_month=" + to_month + "&totalcharges=" + totalcharges);
+    }
+
+
+function insRow(i,month,op1,op2,op3,total,claim)
+{
+    if(i == 1) {
+        document.getElementById('month1').value = month;
+        document.getElementById('op11').value = op1;
+        document.getElementById('op21').value = op2;
+        document.getElementById('op31').value = op3;
+        document.getElementById('total1').value = total;
+        document.getElementById('claim1').value = claim;
+    }
+    else {
+        var x=document.getElementById('billtable');
+        var new_row = x.rows[1].cloneNode(true);
+        var inp1 = new_row.cells[0].getElementsByTagName('input')[0];
+        inp1.value = month;
+        var inp2 = new_row.cells[1].getElementsByTagName('input')[0];
+        inp2.value = op1;
+        var inp3 = new_row.cells[2].getElementsByTagName('input')[0];
+        inp3.value = op2;
+        var inp4 = new_row.cells[3].getElementsByTagName('input')[0];
+        inp4.value = op3;
+        var inp5 = new_row.cells[4].getElementsByTagName('input')[0];
+        inp5.value = total;
+        var inp6 = new_row.cells[5].getElementsByTagName('input')[0];
+        inp6.value = claim;
+        new_row.onChange
+        x.appendChild( new_row );
+    }
+}
+
 </script>
 
 </body>

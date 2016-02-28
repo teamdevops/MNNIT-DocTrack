@@ -134,6 +134,20 @@ class DB_Functions {
             return NULL;
         }
     }
+
+    public function submitTelephoneBill($uuid, $landline, $mobile1, $mobile2, $from_month, $to_month, $totalcharges) {
+        $stmt = $this->conn->prepare("INSERT INTO telephone_bill(uuid, landline, mobile1, mobile2, from_month, to_month, totalcharges, created_at) VALUES(?, ?, ?, ?, ?, ?, ?, NOW())");
+        $stmt->bind_param("ssssssd", $uuid, $landline, $mobile1, $mobile2, $from_month, $to_month, $totalcharges);
+        $result = $stmt->execute();
+        $error = $stmt->error;
+        $stmt->close();
+        // check for successful store
+        if ($result) {
+                return true;
+            } else {
+                return false;
+        }
+    }
 }
 
 ?>
